@@ -1,5 +1,4 @@
 import axios from "axios";
-import { act } from "react-dom/test-utils";
 
 // constants
 const initialState = {
@@ -32,7 +31,11 @@ export default function pokeReducer(state = initialState, action) {
         offset: action.payload.offset,
       };
     case GET_POKEMON_SUCCESS:
-      return;
+      return {
+        ...state,
+        object: action.payload.data,
+        actualURL: action.payload.actualURL,
+      };
     default:
       return state;
   }
@@ -40,13 +43,11 @@ export default function pokeReducer(state = initialState, action) {
 
 // actions
 export const getPokemonsAction = () => async (dispatch, getState) => {
-  console.log(getState().pokemons);
-
   const offset = getState().pokemons.offset;
 
   try {
     const res = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=5`
+      `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=20`
     );
     dispatch({
       type: GET_POKEMONS_SUCCESS,
@@ -62,7 +63,7 @@ export const getNextPokemonsAction = () => async (dispatch, getState) => {
 
   try {
     const res = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=5`
+      `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=20`
     );
     dispatch({
       type: GET_NEXT_POKEMONS_SUCCESS,
@@ -80,7 +81,7 @@ export const getPrevPokemonsAction = () => async (dispatch, getState) => {
 
   try {
     const res = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=5`
+      `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=20`
     );
     dispatch({
       type: GET_PREV_POKEMONS_SUCCESS,
@@ -89,9 +90,17 @@ export const getPrevPokemonsAction = () => async (dispatch, getState) => {
   } catch (error) {}
 };
 
-export const getPokemonAction = () => async (dispatch, getState) => {
-  let actualURL = getState().pokemons.actualURL;
+export const getPokemonAction = (url) => async (dispatch, getState) => {
   try {
-    const res = await axios.get(actualURL);
-  } catch (error) {}
+    const res = await axios.get(url);
+    dispatch({
+      type: GET_POKEMON_SUCCESS,
+      payload: {
+        data: res.data,
+        actualURL: url,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };
