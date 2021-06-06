@@ -18,6 +18,11 @@ export const Card = styled.li`
   text-decoration: none;
 `;
 
+export const DetailCard = styled(Card)`
+  justify-content: center;
+  padding: 15px;
+`;
+
 export const Container = styled.div`
   background-color: #000;
   height: 100vh;
@@ -49,4 +54,17 @@ export const TransparentButton = styled.button`
   background-color: transparent;
   color: white;
   border: none;
+`;
+
+export const Image = styled.img`
+  height: 100;
+  width: 100;
+`;
+
+export const Title = styled.h1`
+  font-size: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+  font-family: sans-serif;
 `;
