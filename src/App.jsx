@@ -9,9 +9,7 @@ function App() {
 
   return (
     <Provider store={store}>
-      <div style={{ backgroundColor: "#000" }}>
-        <Pokemons />
-      </div>
+      <Pokemons />
     </Provider>
   );
 }

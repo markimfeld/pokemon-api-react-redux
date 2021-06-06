@@ -9,6 +9,58 @@ import {
 } from "../redux/pokeDucks";
 
 import PokemonDetail from "../components/PokemonDetail";
+import styled from "styled-components";
+
+const Card = styled.li`
+  -webkit-box-shadow: 0px 0px 4px 2px rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 0.3);
+  display: flex;
+  flex: 1 1 200px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  background-color: #1f1f1f;
+  border-radius: 6px;
+  color: white;
+  font-family: sans-serif;
+  font-size: 20px;
+  margin: 10px;
+  list-style: none;
+  text-decoration: none;
+`;
+
+const Container = styled.div`
+  background-color: #000;
+  height: 100vh;
+`;
+
+const BtnContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+`;
+
+const Button = styled.button`
+  background-color: ${(props) => (props.primary ? "#bb86fc" : "#03DAC5")};
+  padding: 10px 15px;
+  margin: 2px;
+  border: none;
+  font-size: 15px;
+  border-radius: 4px;
+`;
+
+const List = styled.ul`
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const TransparentButton = styled.button`
+  background-color: transparent;
+  color: white;
+  border: none;
+`;
 
 const Pokemons = () => {
   const dispatch = useDispatch();
@@ -16,120 +68,43 @@ const Pokemons = () => {
   const offset = useSelector((store) => store.pokemons.offset);
   const currentPokemon = useSelector((store) => store.pokemons.object);
 
-  const styles = {
-    container: {
-      backgroundColor: "#000",
-      height: "100vh",
-    },
-    btnContainer: {
-      display: "flex",
-      justifyContent: "center",
-      paddingTop: 10,
-    },
-    btn: {
-      paddingTop: 10,
-      paddingBottom: 10,
-      paddingLeft: 15,
-      paddingRight: 15,
-      margin: 2,
-      border: "none",
-      backgroundColor: "#BB86FC",
-      fontSize: 15,
-      borderRadius: 4,
-    },
-    title: {
-      fontSize: 30,
-      textAlign: "center",
-      color: "white",
-      fontFamily: "sans-serif",
-    },
-    card: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      padding: 30,
-      backgroundColor: "#1F1F1F",
-      borderRadius: 6,
-      color: "white",
-      fontFamily: "sans-serif",
-      fontSize: 20,
-      margin: 10,
-      listStyle: "none",
-      textDecoration: "none",
-    },
-    list: {
-      padding: 0,
-      display: "flex",
-      flexWrap: "wrap",
-      justifyContent: "center",
-    },
-    text: {
-      color: "black",
-      textAlign: "center",
-      fontFamily: "sans-serif",
-      fontSize: 20,
-      padding: 20,
-      backgroundColor: "#BB86FC",
-    },
-    links: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      textDecoration: "none",
-      backgroundColor: "transparent",
-      color: "white",
-      padding: 0,
-      margin: 0,
-      cursor: "pointer",
-    },
-    btnTransparent: {
-      backgroundColor: "transparent",
-      color: "white",
-      border: "none",
-    },
-  };
-
   return (
-    <div style={styles.container}>
-      <div style={styles.btnContainer}>
-        <button
-          style={styles.btn}
-          onClick={() => dispatch(getPokemonsAction())}
-        >
+    <Container>
+      <BtnContainer>
+        <Button primary onClick={() => dispatch(getPokemonsAction())}>
           Get Pokemons
-        </button>
-        <button
-          onClick={() => dispatch(getPrevPokemonsAction())}
+        </Button>
+        <Button
+          secondary
           disabled={!offset}
-          style={styles.btn}
+          onClick={() => dispatch(getPrevPokemonsAction())}
         >
           Prev
-        </button>
-        <button
-          style={styles.btn}
+        </Button>
+        <Button
+          secondary
           disabled={!pokemons.length}
           onClick={() => dispatch(getNextPokemonsAction())}
         >
           Next
-        </button>
-      </div>
+        </Button>
+      </BtnContainer>
       {Object.entries(currentPokemon).length > 0 && <PokemonDetail />}
-      <ul style={styles.list}>
+      <List>
         {pokemons.length > 0 &&
           pokemons.map((pokemon) => (
-            <li style={styles.card} key={pokemon.name}>
+            <Card key={pokemon.name}>
               <span>{pokemon.name}</span>
-              <button
-                style={styles.btnTransparent}
+              <TransparentButton
                 onClick={() => dispatch(getPokemonAction(pokemon.url))}
               >
                 <i className="material-icons">visibility</i>
-              </button>
-            </li>
+              </TransparentButton>
+            </Card>
           ))}
-        {pokemons.length === 0 && <li style={styles.card}>No hay pokemones</li>}
-      </ul>
-    </div>
+        {pokemons.length === 0 && <Card>No hay pokemones</Card>}
+      </List>
+    </Container>
   );
 };
 

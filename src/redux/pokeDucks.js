@@ -59,7 +59,7 @@ export const getPokemonsAction = () => async (dispatch, getState) => {
 export const getNextPokemonsAction = () => async (dispatch, getState) => {
   let offset = getState().pokemons.offset;
 
-  offset++;
+  offset += 20;
 
   try {
     const res = await axios.get(
@@ -76,7 +76,7 @@ export const getPrevPokemonsAction = () => async (dispatch, getState) => {
   let offset = getState().pokemons.offset;
 
   if (offset > 0) {
-    offset--;
+    offset -= 20;
   }
 
   try {
