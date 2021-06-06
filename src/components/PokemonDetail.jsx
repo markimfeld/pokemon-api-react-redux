@@ -10,7 +10,7 @@ const PokemonDetail = (props) => {
   return (
     <DetailCard>
       <Image
-        src={currentPokemon.sprites.back_default}
+        src={currentPokemon.sprites.front_default}
         alt={currentPokemon.name}
       />
       <Title>{currentPokemon.name}</Title>
