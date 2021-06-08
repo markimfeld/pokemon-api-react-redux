@@ -9,6 +9,3 @@ A mini app that show all pokemons characters consuming the pokeapi.co API.
 - Basics of Redux
 - Basics of Styled Components
 - Implement a basic pagination
-
-
-- probando git
