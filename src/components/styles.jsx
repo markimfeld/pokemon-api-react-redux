@@ -1,5 +1,18 @@
 import styled from "styled-components";
 
+export const MainContainer = styled.main`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+`;
+
+export const SearchContainer = styled.div`
+  background-color: white;
+  padding: 5rem;
+  margin: 0.7rem;
+  border-radius: 6px;
+`;
+
 export const Card = styled.li`
   -webkit-box-shadow: 0px 0px 4px 2px rgba(255, 255, 255, 0.1);
   box-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 0.3);
@@ -21,6 +34,9 @@ export const Card = styled.li`
 export const DetailCard = styled(Card)`
   justify-content: center;
   padding: 15px;
+  height: 20rem;
+  flex-basis: 30rem;
+  flex-grow: 1;
 `;
 
 export const Container = styled.div`
@@ -45,6 +61,10 @@ export const Button = styled.button`
 
 export const List = styled.ul`
   padding: 0;
+  margin: 0;
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: calc(50% - 1rem);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

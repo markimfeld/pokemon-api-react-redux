@@ -12,6 +12,7 @@ const GET_POKEMONS_SUCCESS = "GET_POKEMONS_SUCCESS";
 const GET_NEXT_POKEMONS_SUCCESS = "GET_NEXT_POKEMONS_SUCCESS";
 const GET_PREV_POKEMONS_SUCCESS = "GET_PREV_POKEMONS_SUCCESS";
 const GET_POKEMON_SUCCESS = "GET_POKEMON_SUCCESS";
+const SET_POKEMONS_SUCCESS = "SET_POKEMONS_SUCCESS";
 
 // reducers
 export default function pokeReducer(state = initialState, action) {
@@ -35,6 +36,11 @@ export default function pokeReducer(state = initialState, action) {
         ...state,
         object: action.payload.data,
         actualURL: action.payload.actualURL,
+      };
+    case SET_POKEMONS_SUCCESS:
+      return {
+        ...state,
+        array: action.payload.data,
       };
     default:
       return state;
@@ -102,5 +108,29 @@ export const getPokemonAction = (url) => async (dispatch, getState) => {
     });
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const setPokemonsAction = (filter) => async (dispatch, getState) => {
+  const pokemons = getState().pokemons.array;
+
+  const pokemonsFiltered = pokemons.filter((pokemon) =>
+    pokemon.name.includes(filter)
+  );
+
+  if (pokemonsFiltered.length > 0) {
+    dispatch({
+      type: SET_POKEMONS_SUCCESS,
+      payload: {
+        data: pokemonsFiltered,
+      },
+    });
+  } else {
+    dispatch({
+      type: SET_POKEMONS_SUCCESS,
+      payload: {
+        data: pokemons,
+      },
+    });
   }
 };
