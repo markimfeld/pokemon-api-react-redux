@@ -9,11 +9,11 @@ const PokemonDetail = (props) => {
 
   return (
     <DetailCard>
+      <Title>{currentPokemon.name}</Title>
       <Image
         src={currentPokemon.sprites.front_default}
         alt={currentPokemon.name}
       />
-      <Title>{currentPokemon.name}</Title>
     </DetailCard>
   );
 };

@@ -6,6 +6,7 @@ const initialState = {
   offset: 0,
   object: {},
   actualURL: "",
+  copyArray: [],
 };
 
 const GET_POKEMONS_SUCCESS = "GET_POKEMONS_SUCCESS";
@@ -18,17 +19,23 @@ const SET_POKEMONS_SUCCESS = "SET_POKEMONS_SUCCESS";
 export default function pokeReducer(state = initialState, action) {
   switch (action.type) {
     case GET_POKEMONS_SUCCESS:
-      return { ...state, array: action.payload };
+      return {
+        ...state,
+        array: action.payload.data,
+        copyArray: action.payload.copy,
+      };
     case GET_NEXT_POKEMONS_SUCCESS:
       return {
         ...state,
         array: action.payload.data,
+        copyArray: action.payload.copy,
         offset: action.payload.offset,
       };
     case GET_PREV_POKEMONS_SUCCESS:
       return {
         ...state,
         array: action.payload.data,
+        copyArray: action.payload.copy,
         offset: action.payload.offset,
       };
     case GET_POKEMON_SUCCESS:
@@ -57,7 +64,10 @@ export const getPokemonsAction = () => async (dispatch, getState) => {
     );
     dispatch({
       type: GET_POKEMONS_SUCCESS,
-      payload: res.data.results,
+      payload: {
+        data: res.data.results,
+        copy: res.data.results,
+      },
     });
   } catch (error) {}
 };
@@ -73,7 +83,11 @@ export const getNextPokemonsAction = () => async (dispatch, getState) => {
     );
     dispatch({
       type: GET_NEXT_POKEMONS_SUCCESS,
-      payload: { data: res.data.results, offset: offset },
+      payload: {
+        data: res.data.results,
+        copy: res.data.results,
+        offset: offset,
+      },
     });
   } catch (error) {}
 };
@@ -91,7 +105,11 @@ export const getPrevPokemonsAction = () => async (dispatch, getState) => {
     );
     dispatch({
       type: GET_PREV_POKEMONS_SUCCESS,
-      payload: { data: res.data.results, offset: offset },
+      payload: {
+        data: res.data.results,
+        copy: res.data.results,
+        offset: offset,
+      },
     });
   } catch (error) {}
 };
@@ -112,25 +130,16 @@ export const getPokemonAction = (url) => async (dispatch, getState) => {
 };
 
 export const setPokemonsAction = (filter) => async (dispatch, getState) => {
-  const pokemons = getState().pokemons.array;
+  const pokemons = getState().pokemons.copyArray;
 
   const pokemonsFiltered = pokemons.filter((pokemon) =>
     pokemon.name.includes(filter)
   );
 
-  if (pokemonsFiltered.length > 0) {
-    dispatch({
-      type: SET_POKEMONS_SUCCESS,
-      payload: {
-        data: pokemonsFiltered,
-      },
-    });
-  } else {
-    dispatch({
-      type: SET_POKEMONS_SUCCESS,
-      payload: {
-        data: pokemons,
-      },
-    });
-  }
+  dispatch({
+    type: SET_POKEMONS_SUCCESS,
+    payload: {
+      data: pokemonsFiltered,
+    },
+  });
 };

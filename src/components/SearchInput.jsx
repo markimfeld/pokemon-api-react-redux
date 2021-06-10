@@ -1,29 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 
 import { setPokemonsAction } from "../redux/pokeDucks";
 
+import { FormControl, Label, Input } from "../components/styles";
+
 const SearchInput = () => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState("");
 
-  console.log(filter);
+  useEffect(() => {
+    dispatch(setPokemonsAction(filter));
+  }, [dispatch, filter]);
 
   return (
-    <div>
-      <label htmlFor="pokemon">Buscar por nombre</label>
-      <input
+    <FormControl>
+      <Label htmlFor="pokemon">Buscar por nombre</Label>
+      <Input
         onChange={(e) => {
           setFilter(e.target.value);
-          dispatch(setPokemonsAction(filter));
         }}
         value={filter}
         type="text"
         name="pokemon"
         id="pokemon"
       />
-    </div>
+    </FormControl>
   );
 };
 

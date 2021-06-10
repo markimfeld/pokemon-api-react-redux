@@ -40,14 +40,14 @@ const Pokemons = () => {
           disabled={!offset}
           onClick={() => dispatch(getPrevPokemonsAction())}
         >
-          Prev
+          Anterior
         </Button>
         <Button
           secondary
           disabled={!pokemons.length}
           onClick={() => dispatch(getNextPokemonsAction())}
         >
-          Next
+          Siguiente
         </Button>
       </BtnContainer>
       <SearchContainer>

@@ -7,10 +7,35 @@ export const MainContainer = styled.main`
 `;
 
 export const SearchContainer = styled.div`
-  background-color: white;
-  padding: 5rem;
+  background-color: #1f1f1f;
+  padding: 2rem;
   margin: 0.7rem;
   border-radius: 6px;
+  -webkit-box-shadow: 0px 0px 4px 2px rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 0.3);
+`;
+
+export const FormControl = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Label = styled.label`
+  color: white;
+  margin-bottom: 0.6rem;
+  font-family: sans-serif;
+  font-size: 1.1rem;
+`;
+
+export const Input = styled.input`
+  padding: 0.7rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #2f2f2f;
+  color: white;
+  font-size: 1.1rem;
+  font-family: sans-serif;
+  outline: none;
 `;
 
 export const Card = styled.li`
@@ -33,8 +58,10 @@ export const Card = styled.li`
 
 export const DetailCard = styled(Card)`
   justify-content: center;
+  display: flex;
+  flex-direction: column;
   padding: 15px;
-  height: 20rem;
+  height: 31rem;
   flex-basis: 30rem;
   flex-grow: 1;
 `;
@@ -77,8 +104,8 @@ export const TransparentButton = styled.button`
 `;
 
 export const Image = styled.img`
-  height: 100;
-  width: 100;
+  height: 250px;
+  width: 250px;
 `;
 
 export const Title = styled.h1`
