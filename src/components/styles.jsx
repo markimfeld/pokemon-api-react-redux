@@ -60,10 +60,11 @@ export const DetailCard = styled(Card)`
   justify-content: center;
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  padding: 0px;
   height: 31rem;
   flex-basis: 30rem;
   flex-grow: 1;
+  border-box: box-sizing;
 `;
 
 export const Container = styled.div`
@@ -108,10 +109,22 @@ export const Image = styled.img`
   width: 250px;
 `;
 
+export const Avatar = styled.img`
+  height: 50px;
+  width: 50px;
+`;
+
 export const Title = styled.h1`
   font-size: 30px;
   text-align: center;
   text-transform: uppercase;
   color: white;
   font-family: sans-serif;
+`;
+
+export const Separator = styled.div`
+  background-color: #bb86fc;
+  height: 0.01rem;
+  width: 100%;
+  margin: 0.8rem 0;
 `;
