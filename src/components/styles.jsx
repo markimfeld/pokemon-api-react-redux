@@ -70,6 +70,7 @@ export const DetailCard = styled(Card)`
 export const Container = styled.div`
   background-color: #000;
   height: 100vh;
+  padding: 1.5rem;
 `;
 
 export const BtnContainer = styled.div`
@@ -127,4 +128,28 @@ export const Separator = styled.div`
   height: 0.01rem;
   width: 100%;
   margin: 0.8rem 0;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Col = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const Stats = styled.span`
+  font-weight: bold;
+  font-size: 14px;
+  color: #bb86fc;
+`;
+
+export const ActionType = styled.span`
+  font-size: 15px;
 `;

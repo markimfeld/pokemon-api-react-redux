@@ -6,8 +6,11 @@ import {
   DetailCard,
   Image,
   Title,
-  Avatar,
   Separator,
+  Row,
+  Col,
+  Stats,
+  ActionType,
 } from "../components/styles";
 
 const PokemonDetail = (props) => {
@@ -27,56 +30,20 @@ const PokemonDetail = (props) => {
       </Title>
       <p>{currentPokemon.base_experience} exp</p>
       <Separator />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: 10,
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <span style={{ fontWeight: "bold", fontSize: 14, color: "#bb86fc" }}>
-            {currentPokemon.stats[1].base_stat}K
-          </span>
-          <span style={{ fontSize: 15 }}>Ataque</span>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: 10,
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <span style={{ fontWeight: "bold", fontSize: 14, color: "#bb86fc" }}>
-            {currentPokemon.stats[3].base_stat}K
-          </span>
-          <span style={{ fontSize: 15 }}>Ataque Especial</span>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: 20,
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <span style={{ fontWeight: "bold", fontSize: 14, color: "#bb86fc" }}>
-            {currentPokemon.stats[2].base_stat}K
-          </span>
-          <span style={{ fontSize: 15 }}>Defensa</span>
-        </div>
-      </div>
+      <Row>
+        <Col>
+          <Stats>{currentPokemon.stats[1].base_stat}K</Stats>
+          <ActionType>Ataque</ActionType>
+        </Col>
+        <Col>
+          <Stats>{currentPokemon.stats[3].base_stat}K</Stats>
+          <ActionType>Ataque Especial</ActionType>
+        </Col>
+        <Col>
+          <Stats>{currentPokemon.stats[2].base_stat}K</Stats>
+          <ActionType>Defensa</ActionType>
+        </Col>
+      </Row>
     </DetailCard>
   );
 };
